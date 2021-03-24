@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+/*============box que envolve todo o projeto============*/
+.boxMain {
+    display: flex;/*alinha itens ao meio*/
+    align-items: center;/*alinha itens ao meio*/
+    justify-content: center;/*alinha itens ao meio*/
+    flex-direction: column;
+}
