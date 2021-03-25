@@ -1,0 +1,25 @@
+/*================box home=====================*/
+.boxHome{
+    background-color: rgb(238, 213, 182);
+}
+.home{
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 900px;
+    height: 900px;
+    margin-top: -4px;
+}
+.paginacao{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 20px 0;
+
+}
+.paginacao button{
+    margin: 0 30px 0 20px;
+}
+
+
