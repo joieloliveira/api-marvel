@@ -10,7 +10,7 @@ function App() {
     <div className="boxMain">
       <Header />
       <Routes />
-      <Footer />
+      
     </div>
   )
 }

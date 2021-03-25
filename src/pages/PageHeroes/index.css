@@ -20,6 +20,7 @@
     justify-content: center;
     height: 100%;
     width: 100%;
+    border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .cardHeroeDescription .boxImgDescription{
@@ -53,7 +54,39 @@
 }
 
 .boxPageHeroe{
-    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-/* :nth-child(2){ */
+/*==================series que participou====================*/
+.seriesRow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+.seriesRow .boxSeries{
+    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+    border-style: solid;
+    border-color: rgb(5, 0, 0);
+    margin: 5px;
+}
+.seriesRow .boxSeries .tittle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    padding: 5px;
+}
+.seriesRow .boxSeries .content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    background-color: rgb(202, 140, 58);
+    color: rgb(199, 12, 12);
+}

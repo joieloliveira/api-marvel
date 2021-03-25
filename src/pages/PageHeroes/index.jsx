@@ -11,7 +11,6 @@ const maxCharacters = 1500;
 function Heroes (props) {
 
   const [arrayDataHeroe, setArrayDataHeroe] = useState([]);
-  /* const [arrayDataSeries, setArrayDataSeries] = useState([]); */
 
   const id = props.match.params.id
 
@@ -41,48 +40,25 @@ function Heroes (props) {
       //console.log(err)
     }
 
-    //const urlAPI = "http://gateway.marvel.com/v1/public/characters?limit=9&offset="+offset+"&ts="+timeStamp+"&apikey="+publicKey+"&hash="+hash;
   }
-//Conexão para buscar as series===========================================
-  /* const apiSeries = async (req, res) => {  
 
-    //tempo agora
-    const timeStamp = Date.now().toString();
-    //numero randomico de herois
-    const offset = Math.floor((Math.random() * maxCharacters) + 1);
-    //hash para validar a requisição
-    const hash = createHash(timeStamp);
-
-    try {
-      const { data } = await axios("http://gateway.marvel.com/v1/public/characters/"+id+"/series?limit=10&offset="+offset+"&ts="+timeStamp+"&apikey="+publicKey+"&hash="+hash)
-      console.log(data);
-      //console.log(data.data.results[0].stories.collectionURI);
-      setArrayDataSeries([data]);
-    } catch (err) {
-      //console.log(err)
-    }
-
-    //const urlAPI = "http://gateway.marvel.com/v1/public/characters?limit=9&offset="+offset+"&ts="+timeStamp+"&apikey="+publicKey+"&hash="+hash;
-  } */
-
-  /* console.log(arrayDataSeries); */
-
-  useEffect(async () => {
+  useEffect( () => {
     apiHeroe()
-    //apiSeries()
   }, []);
-
-   /* let cards = []
-  for(var i=0; i<49; i++){
-    arrayData.map(card=>{
-      const http = `${card.data.results[i].thumbnail.path}.${card.data.results[i].thumbnail.extension}`
-      cards.push(
-        <Card titulo={card.data.results[i].name} id={card.data.results[i].id.toString()} key={card.data.results[i].id.toString()}>
-          <img id="img" src = {http}/>
-        </Card>
+ 
+  var seriesName = []
+  arrayDataHeroe.map(series => {
+    for (let i=0; i<series.data.results[0].series.items.length; i++){
+      let urlSeries = series.data.results[0].series.items[i];
+      seriesName.push(
+        <div className="boxSeries" key={seriesName.toString()}>
+          <div className="tittle">Serie que participou</div> 
+          <div className="content">{urlSeries.name}</div>
+        </div>
       )
-      })
-  }  */
+    }
+  })
+  
 
   let mkPageHeroeChoose = []
   arrayDataHeroe.map(page=>{
@@ -97,7 +73,7 @@ function Heroes (props) {
             </div>
 
             <div className="boxDescription">
-              <p><strong>Descrição:</strong> {page?.data.results[0].description ? page.data.results[0].description : 'There is no information or description of this hero'}</p> 
+              <p><strong>Descrição:</strong> {page.data.results[0].description ? page.data.results[0].description : 'There is no information or description of this hero'}</p> 
             </div>
           </div>
       </div>
@@ -105,31 +81,16 @@ function Heroes (props) {
     }
   )
 
-  //<DescriptionHero>{item?.description ? item.description : 'There is no information or description of this hero'}</DescriptionHero>
-  /* let series = []
-  arrayDataSeries.map(page=>{
-      //const thumbnail = `${page.data.results[0].thumbnail.path}.${page.data.results[0].thumbnail.extension}`;
-      //console.log(page.data.results[0].series.items[1].resourceURI);
-      mkPageHeroeChoose.push(
-      <div key={mkPageHeroeChoose.toString()}>
-        <div className="thumbnailDescription">
-          
-          <div className="thumbnail">
-          </div>
-
-          <div className="description">
-            <p>{page.data.results[0].series.items.resourceURI}</p> 
-          </div>
-
-        </div>
-      </div>
-      )
-    }
-  ) */
-
   return(
-    <Container className="boxPageHeroe">
-      <div>{mkPageHeroeChoose}</div>
+    <Container>
+      <Jumbotron className="boxPageHeroe">
+        <div>{mkPageHeroeChoose}</div>
+      </Jumbotron>
+      <Jumbotron>
+        <div className="seriesRow">
+        {seriesName!="" ? seriesName : <strong>Nenhuma paticipação em series</strong>}
+        </div>
+      </Jumbotron>
     </Container>
   )
 }
