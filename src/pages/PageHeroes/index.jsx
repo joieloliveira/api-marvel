@@ -33,8 +33,6 @@ function Heroes (props) {
 
     try {
       const { data } = await axios("http://gateway.marvel.com/v1/public/characters/"+id+"?limit=1&offset="+offset+"&ts="+timeStamp+"&apikey="+publicKey+"&hash="+hash)
-      console.log(data);
-      //console.log(data.data.results[0].stories.collectionURI);
       setArrayDataHeroe([data]);
     } catch (err) {
       //console.log(err)
@@ -63,9 +61,9 @@ function Heroes (props) {
   let mkPageHeroeChoose = []
   arrayDataHeroe.map(page=>{
       const thumbnail = `${page.data.results[0].thumbnail.path}.${page.data.results[0].thumbnail.extension}`;
-      //console.log(page.data.results[0].series.items[1].resourceURI);
+      
       mkPageHeroeChoose.push(
-      <div className="cardHeroeDescription" key={mkPageHeroeChoose.toString()}>
+      <div className="cardHeroeDescription" key={page.data.results[0].id}>
           <div className="Title"><strong>{page.data.results[0].name}</strong></div> 
           <div className="boxImgDescription">
             <div className="boxImg">

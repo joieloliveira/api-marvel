@@ -10,9 +10,11 @@ const publicKey = "5335615c429ef88bb477be5acd7c2d86";
 const maxCharacters = 1500;
 
 function Home() {
-  
 
   const [arrayData, setArrayData] = useState([]);
+
+  const [offset, setOffset] = useState(0);
+  const [paginaStap, setPaginaStap] = useState(12);
 
   const createHash = (timeStamp) => {
 
@@ -32,9 +34,7 @@ function Home() {
       const hash = createHash(timeStamp);
 
       try {
-        const { data } = await axios("http://gateway.marvel.com/v1/public/characters?limit=50&offset="+offset+"&ts="+timeStamp+"&apikey="+publicKey+"&hash="+hash)
-        console.log(data);
-        console.log(data.data.results[0].id);
+        const { data } = await axios("http://gateway.marvel.com/v1/public/characters?limit=48&offset="+offset+"&ts="+timeStamp+"&apikey="+publicKey+"&hash="+hash)
         setArrayData([data]);
       } catch (err) {
         //console.log(err)
@@ -42,11 +42,30 @@ function Home() {
   }
 
   useEffect( () => {
-    api()
+    api();
   }, []);
+ 
+  const pagination = (props) => {
+    if(props==1){
+      setOffset(0);
+      setPaginaStap(12)
+    }else
+    if(props==2){
+      setOffset(12);
+      setPaginaStap(24)
+    }else
+    if(props==3){
+      setOffset(24);
+      setPaginaStap(36)
+    }else
+    if(props==4){
+      setOffset(36);
+      setPaginaStap(48)
+    }
+  }
 
   let cards = []
-    for(var i=0; i<12; i++){
+    for(var i=offset; i<paginaStap; i++){
       arrayData.map(card=>{
         const http = `${card.data.results[i].thumbnail.path}.${card.data.results[i].thumbnail.extension}`
         cards.push(
@@ -56,19 +75,19 @@ function Home() {
         )
         })
     }
-
+    
   return (
-    <div className="boxHome">
+    <div className="boxHome"> 
       <div className="home">
         {cards}
       </div>
       <div className="paginacao">
-        <a href="/">previus</a>
-        <a href="/">1</a>
-        <a href="/">2</a>
-        <a href="/">3</a>
-        <a href="/">4</a>
-        <a href="/">next</a>
+        <div href="/">previus</div>
+        <button  onClick={e => pagination(1)}>1</button>
+        <button  onClick={e => pagination(2)}>2</button>
+        <button  onClick={e => pagination(3)}>3</button>
+        <button  onClick={e => pagination(4)}>4</button>
+        <div href="/">next</div>
       </div>
     </div>
   )

@@ -6,8 +6,6 @@
     width: 180px;
     height: 280px;
     border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-    /* border-style: solid;
-       border-color: brown; */
 }
 .title{
     display: flex;

@@ -24,9 +24,7 @@ function Card(props){
     ); 
 
     function alterarInserir(id) {
-        // action creator -> action
         history.push(`/pageheroes/${id}`);
-        console.log(id)
     }
 }
 
